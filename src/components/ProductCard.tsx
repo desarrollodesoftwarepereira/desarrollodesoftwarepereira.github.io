@@ -29,7 +29,6 @@ const ProductCard: React.FC<ProductCardProps> = ({
   };
 
   const minusQuantity = (e: React.MouseEvent<HTMLButtonElement>) => {
-    console.log('minusQuantity', product.name);
     if (setProductQuantities) {
       setProductQuantities((prev) => {
         const existingProduct = prev.find(
@@ -50,7 +49,6 @@ const ProductCard: React.FC<ProductCardProps> = ({
   };
 
   const plusQuantity = (e: React.MouseEvent<HTMLButtonElement>) => {
-    console.log('plusQuantity', product.name);
     if (setProductQuantities) {
       setProductQuantities((prev) => {
         const existingProduct = prev.find(
@@ -101,9 +99,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
         )}
         <h3 className="text-lg font-bold">{product.name}</h3>
         <p className="text-sm">{product.description}</p>
-        <p className="mb-2 font-semibold">
-          ${(product.price / 100).toFixed(2)}
-        </p>
+        <p className="mb-2 font-semibold">${product.price}</p>
         <div className="flex items-end flex-1">
           <div className="flex items-center gap-2">
             <button
@@ -143,9 +139,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
             )}
             <h3 className="text-lg font-bold">{product.name}</h3>
             <p className="text-sm">{product.description}</p>
-            <p className="mb-2 font-semibold">
-              ${(product.price / 100).toFixed(2)}
-            </p>
+            <p className="mb-2 font-semibold">${product.price}</p>
             <div className="flex items-center gap-2">
               <button
                 onClick={minusQuantity}
