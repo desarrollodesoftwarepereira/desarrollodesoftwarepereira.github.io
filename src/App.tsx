@@ -1,29 +1,28 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import Profile from './components/Profile';
+import ProductsByCategory from './components/ProductsByCategory';
+import ShoppingCart from './components/ShoppingCart';
+import { useState } from 'react';
+import { Product } from './interfaces/ProductInterface';
 
-function App() {
-  const [count, setCount] = useState(0)
-
+const App: React.FC = () => {
+  const [productQuantities, setProductQuantities] = useState<
+    { product: Product; quantity: number }[]
+  >([]);
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="flex items-center justify-center w-full h-full p-2 xs:p-4 sm:p-8">
+      <div className="container flex flex-col gap-4 p-2 shadow-lg xs:gap-6 sm:gap-8 xs:p-4 sm:p-8 bg-app-bg rounded-2xl">
+        <Profile />
+        <ProductsByCategory
+          productQuantities={productQuantities}
+          setProductQuantities={setProductQuantities}
+        />
+        <ShoppingCart
+          productQuantities={productQuantities}
+          setProductQuantities={setProductQuantities}
+        />
       </div>
-      <h1 className='text-4xl font-bold underline text-amber-300'>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-      </div>
-    </>
-  )
-}
+    </div>
+  );
+};
 
-export default App
+export default App;

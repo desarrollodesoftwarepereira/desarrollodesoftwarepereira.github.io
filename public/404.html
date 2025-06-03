@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 Not Found</title>
+    <link rel="icon" href="./assets/favicon.ico" type="image/x-icon" />
+    <style>
+      body {
+        font-family: sans-serif;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-color: #e5e7eb;
+        margin: 0;
+      }
+      .container {
+        text-align: center;
+        background-color: #f9fafb;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        font-size: 1.5em;
+        color: #333;
+        margin: 0;
+        padding: 20px 20px 0 20px;
+      }
+      p {
+        font-size: 1.2em;
+        color: #666;
+        margin: 0;
+        padding: 0 20px 20px 20px;
+      }
+      a {
+        color: #007bff;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .made-by-container {
+        position: fixed;
+        bottom: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: end;
+        width: 100%;
+      }
+      .not-found-img {
+        width: 100%;
+        max-width: 450px;
+        height: auto;
+        margin: 0 auto 0 auto;
+        display: block;
+      }
+      @media (max-width: 500px) {
+        .not-found-img {
+          max-width: 90vw;
+        }
+      }
+      @media (max-height: 620px) {
+        .container {
+          margin-bottom: 20px;
+        }
+        .not-found-img {
+          min-width: 212px;
+          max-width: 70vh;
+        }
+      }
+      @media (max-height: 500px) {
+        .container {
+          margin-bottom: 0;
+        }
+        .made-by-container {
+          position: unset;
+          margin: 10px;
+          flex: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>¡Uy! No se pudo encontrar la página que buscas.</h1>
+      <img src="./assets/vectors/not found.webp" alt="not found" class="not-found-img" />
+      <p>Regresar a la <a href="/">página de inicio</a>.</p>
+    </div>
+    <div class="made-by-container">
+      <span style="text-align: center; font-size: 0.8em; color: #999;">
+        made with ❤️ by <a href="https://jcastanodev.github.io" target="_blank" rel="noopener noreferrer">jcastanodev</a>
+      </span>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+@theme {
+  --breakpoint-xs: 30rem;
+  --color-corn-yellow: #F1C40F;
+  --color-leaf-green: #2ECC71;
+  --color-toasted-orange: #E67E22;
+  --color-soft-cream: #F5DEB3;
+  --color-rustic-brown: #7B3F00;
+  --color-body-bg: #F1C40F;
+  --color-app-bg: #F5DEB3;
+  --color-category-bg: #7B3F00;
+  --color-category-text: #FFF;
+  --color-product-bg: #faecd2;
+  --color-product-text: #7B3F00;
+  --color-shopping-cart-bg: #2ECC71;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-body-bg);
+    color: var(--color-rustic-brown);
+    font-family: 'Zilla Slab', serif;
+  }
+
+  #root {
+    max-width: 100vw;
+    min-width: 200px;
+    min-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  h1, h2, h3 {
+    font-weight: 700;
+  }
+
+  a {
+    color: var(--color-leaf-green);
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+}
