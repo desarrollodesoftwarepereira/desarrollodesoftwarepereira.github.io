@@ -18,33 +18,69 @@ export const PROFILE: Profile = {
 
 export const PRODUCTS: Category[] = [
   {
-    name: 'AREPAS',
+    name: 'RICAMAS',
     products: [
       {
-        name: 'Arepas',
-        description: 'Arepas recién hechas, perfectas para acompañar cualquier comida.',
-        price: 2000,
+        name: 'Arepas de chocolo',
+        description: 'Arepas RICAMAS de chocolo recién hechas, perfectas para acompañar cualquier comida. Paquete 300g x 5 unidades.',
+        price: 5800,
         imageUrl: './assets/images/arepa-chocolo.webp',
       },
       {
-        name: 'Tortas',
-        description: 'Tortas caseras, ideales para celebraciones y ocasiones especiales.',
-        price: 15000,
+        name: 'Arepas de pandebono',
+        description: 'Arepas RICAMAS de pandebono queso y mantequilla, ideal para acompañar tus desayunos o para las comidas que prefieras. Paquete 350g x 5 unidades.',
+        price: 4700,
+        imageUrl: './assets/images/arepa-pandebono.webp',
       },
       {
-        name: 'Empanadas',
-        description: 'Empanadas crujientes y sabrosas, rellenas de carne, pollo o queso.',
-        price: 3000,
-      }
+        name: 'Arepas rellenas de queso',
+        description: 'Arepas RICAMAS rellenas de queso, de sabor inigualable, ideales para acompañar tus comidas. Paquete 350g x 5 unidades.',
+        price: 6500,
+        imageUrl: './assets/images/arepa-queso.webp',
+      },
+      {
+        name: 'Palitos de queso',
+        description: 'Palitos RICAMAS de maiz rellenos de queso, sabrosos y perfectos para acompañar tus comidas o como snack. Paquete 450g x 8 unidades.',
+        price: 6000,
+        imageUrl: './assets/images/palitos-queso.webp',
+      },
+      {
+        name: 'Mazamorra',
+        description: 'Mazamorra RICAMAS, una deliciosa mezcla de maíz tierno con leche, ideal para disfrutar como postre o desayuno. Paquete 1000g.',
+        price: 5500,
+        imageUrl: './assets/images/mazamorra.webp',
+      },
+      {
+        name: 'Mezcla de mazorca tierna',
+        description: 'Mezcla de mazorca tierna RICAMAS, perfecta para preparar deliciosas tortas. Paquete 1000g.',
+        price: 4600,
+        imageUrl: './assets/images/mezcla-mazorca-tierna.webp',
+      },
     ]
   },
   {
-    name: 'DESGRANADO',
+    name: 'Maiz | Chocolo',
     products: [
       {
         name: 'Maíz tierno desgranado',
         description: 'Maíz tierno desgranado fresco y delicioso, ideal para tus recetas.',
-        price: 5000,
+        price: 5500,
+        unit: 'kg',
+        imageUrl: './assets/images/maiz-desgranado.webp',
+      },
+      {
+        name: 'Masa de maíz tierno',
+        description: 'Masa de maíz tierno fresco y delicioso, ideal para tus preparaciones, lista para utilizar.',
+        price: 6000,
+        unit: 'kg',
+        imageUrl: './assets/images/masa-maiz.webp',
+      },
+      {
+        name: 'Mazorca tierna',
+        description: 'Mazorca tierna fresca, ideal para asar o cocinar, con un sabor inigualable.',
+        price: 3000,
+        unit: 'kg',
+        imageUrl: './assets/images/mazorca.webp',
       }
     ]
   }
