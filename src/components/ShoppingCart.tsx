@@ -1,8 +1,17 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { FaShoppingCart, FaTimes } from 'react-icons/fa';
-import { Product } from '../interfaces/ProductInterface';
+import {
+  Product,
+  ShoppingCartItem,
+  StoredCart,
+} from '../interfaces/ProductInterface';
 import { FaTrash } from 'react-icons/fa6';
-import { PROFILE } from '../Constant';
+import {
+  CART_EXPIRATION_HOURS,
+  CART_STORAGE_KEY,
+  PRODUCTS,
+  PROFILE,
+} from '../Constant';
 
 type ShoppingCartProps = {
   productQuantities: Array<{ product: Product; quantity: number }>;
@@ -15,6 +24,7 @@ const ShoppingCart: React.FC<ShoppingCartProps> = ({
   productQuantities,
   setProductQuantities,
 }) => {
+  const isInitialMount = useRef(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -23,6 +33,46 @@ const ShoppingCart: React.FC<ShoppingCartProps> = ({
 
   const closeModal = () => {
     setIsModalOpen(false);
+  };
+
+  const saveCartToStorage = (
+    cart: Array<{ product: Product; quantity: number }>
+  ) => {
+    const cartData: StoredCart = {
+      items: cart.map(({ product, quantity }) => ({
+        name: product.name,
+        quantity,
+      })),
+      timestamp: new Date().getTime(),
+    };
+    localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cartData));
+  };
+
+  const getCartFromStorage = () => {
+    const cartData = localStorage.getItem(CART_STORAGE_KEY);
+    if (!cartData) return null;
+
+    const { items, timestamp }: StoredCart = JSON.parse(cartData);
+    const hours = (new Date().getTime() - timestamp) / (1000 * 60 * 60);
+
+    if (hours > CART_EXPIRATION_HOURS) {
+      //localStorage.removeItem(CART_STORAGE_KEY);
+      return null;
+    }
+
+    return items
+      .map(({ name, quantity }) => {
+        const product = PRODUCTS.reduce<Product | undefined>(
+          (found, category) => {
+            if (found) return found;
+            return category.products.find((p) => p.name === name);
+          },
+          undefined
+        );
+
+        return product ? { product, quantity } : null;
+      })
+      .filter((item): item is ShoppingCartItem => item !== null);
   };
 
   const goToWhatsapp = () => {
@@ -45,6 +95,18 @@ const ShoppingCart: React.FC<ShoppingCartProps> = ({
   };
 
   useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
+    if (productQuantities.length > 0) {
+      saveCartToStorage(productQuantities);
+    } else {
+      localStorage.removeItem(CART_STORAGE_KEY);
+    }
+  }, [productQuantities]);
+
+  useEffect(() => {
     const handleEsc = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         closeModal();
@@ -59,6 +121,13 @@ const ShoppingCart: React.FC<ShoppingCartProps> = ({
       window.removeEventListener('keydown', handleEsc);
     };
   }, [isModalOpen]);
+
+  useEffect(() => {
+    const savedCart = getCartFromStorage();
+    if (savedCart && setProductQuantities) {
+      setProductQuantities(savedCart);
+    }
+  }, []);
 
   return (
     <>
@@ -85,7 +154,7 @@ const ShoppingCart: React.FC<ShoppingCartProps> = ({
             onClick={(e) => {
               e.stopPropagation();
             }}
-            className="relative w-full max-w-md p-4 rounded-lg shadow-lg bg-product-bg text-product-text"
+            className="relative w-full max-w-md max-h-screen p-4 overflow-y-auto rounded-lg shadow-lg bg-product-bg text-product-text"
           >
             <h2 className="mb-4 text-xl font-bold">Carrito de compras</h2>
             <ul className="space-y-4">
@@ -133,20 +202,32 @@ const ShoppingCart: React.FC<ShoppingCartProps> = ({
               </table>
             </ul>
             {productQuantities.length > 0 && (
-              <div>
-                <div className="mt-4">
-                  <h3 className="text-lg font-semibold">
+              <div className="flex flex-col mt-2">
+                <div className="flex items-center justify-between mt-2">
+                  <p className="font-semibold">
                     Precio total: $
-                    {productQuantities.reduce(
-                      (total, item) =>
-                        total + item.product.price * item.quantity,
-                      0
-                    )}
-                  </h3>
+                    <span className="text-lg">
+                      {productQuantities.reduce(
+                        (total, item) =>
+                          total + item.product.price * item.quantity,
+                        0
+                      )}
+                    </span>
+                  </p>
+                  <button
+                    className="px-2 py-1 ml-auto text-sm text-red-500 border border-red-500 rounded-lg hover:scale-105"
+                    onClick={() => {
+                      if (setProductQuantities) {
+                        setProductQuantities([]);
+                      }
+                    }}
+                  >
+                    Vaciar carrito
+                  </button>
                 </div>
                 <button
                   onClick={goToWhatsapp}
-                  className="w-full px-4 py-2 mt-4 text-white bg-green-500 rounded-lg hover:bg-green-600"
+                  className="w-full px-4 py-2 mt-4 text-white transition-transform duration-300 bg-green-500 rounded-lg hover:scale-105"
                 >
                   Comprar via WhatsApp
                 </button>

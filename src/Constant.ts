@@ -2,6 +2,8 @@ import { Category } from "./interfaces/ProductInterface";
 import { Profile } from "./interfaces/ProfileInterface";
 
 export const DEFAULT_URL = 'http://localhost:5173';
+export const CART_STORAGE_KEY = 'shopping-cart';
+export const CART_EXPIRATION_HOURS = 24;
 
 export const PROFILE: Profile = {
   name: 'CHOCOLO Y MÁS',

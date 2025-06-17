@@ -6,9 +6,12 @@ import ProductCard from './ProductCard';
 type CategoryCardProps = {
   category: Category;
   productQuantities: Array<{ product: Product; quantity: number }>;
-  setProductQuantities?: React.Dispatch<
-    React.SetStateAction<Array<{ product: Product; quantity: number }>>
-  >;
+  setProductQuantities: (
+    productQuantities: {
+      product: Product;
+      quantity: number;
+    }[]
+  ) => void;
 };
 
 const CategoryCard: React.FC<CategoryCardProps> = ({

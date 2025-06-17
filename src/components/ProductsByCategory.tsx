@@ -4,9 +4,12 @@ import CategoryCard from './CategoryCard';
 
 type ProductsByCategoryProps = {
   productQuantities: Array<{ product: Product; quantity: number }>;
-  setProductQuantities?: React.Dispatch<
-    React.SetStateAction<Array<{ product: Product; quantity: number }>>
-  >;
+  setProductQuantities: (
+    productQuantities: {
+      product: Product;
+      quantity: number;
+    }[]
+  ) => void;
 };
 
 const ProductsByCategory: React.FC<ProductsByCategoryProps> = ({

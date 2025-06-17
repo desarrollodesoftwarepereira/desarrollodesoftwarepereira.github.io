@@ -99,7 +99,12 @@ const ProductCard: React.FC<ProductCardProps> = ({
         )}
         <h3 className="text-lg font-bold">{product.name}</h3>
         <p className="text-sm">{product.description}</p>
-        <p className="mb-2 font-semibold">${product.price}</p>
+        <p className="mb-2 font-semibold">
+          ${product.price}
+          {product.unit ? (
+            <span className="text-xs"> x {product.unit}</span>
+          ) : null}
+        </p>
         <div className="flex items-end flex-1">
           <div className="flex items-center gap-2">
             <button
@@ -128,7 +133,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
             onClick={(e) => {
               e.stopPropagation(); // Prevent modal from closing
             }}
-            className="relative flex flex-col items-center max-w-md p-4 rounded-lg bg-product-bg text-product-text"
+            className="relative flex flex-col items-center max-w-md max-h-screen p-4 overflow-y-auto rounded-lg bg-product-bg text-product-text"
           >
             {product.imageUrl && (
               <img
@@ -139,7 +144,12 @@ const ProductCard: React.FC<ProductCardProps> = ({
             )}
             <h3 className="text-lg font-bold">{product.name}</h3>
             <p className="text-sm">{product.description}</p>
-            <p className="mb-2 font-semibold">${product.price}</p>
+            <p className="mb-2 font-semibold">
+              ${product.price}
+              {product.unit ? (
+                <span className="text-xs"> x {product.unit}</span>
+              ) : null}
+            </p>
             <div className="flex items-center gap-2">
               <button
                 onClick={minusQuantity}
