@@ -14,9 +14,9 @@ import {
 } from '../Constant';
 
 type ShoppingCartProps = {
-  productQuantities: Array<{ product: Product; quantity: number }>;
-  setProductQuantities?: React.Dispatch<
-    React.SetStateAction<Array<{ product: Product; quantity: number }>>
+  productQuantities: Array<ShoppingCartItem>;
+  setProductQuantities: React.Dispatch<
+    React.SetStateAction<Array<ShoppingCartItem>>
   >;
 };
 
@@ -35,9 +35,7 @@ const ShoppingCart: React.FC<ShoppingCartProps> = ({
     setIsModalOpen(false);
   };
 
-  const saveCartToStorage = (
-    cart: Array<{ product: Product; quantity: number }>
-  ) => {
+  const saveCartToStorage = (cart: Array<ShoppingCartItem>) => {
     const cartData: StoredCart = {
       items: cart.map(({ product, quantity }) => ({
         name: product.name,

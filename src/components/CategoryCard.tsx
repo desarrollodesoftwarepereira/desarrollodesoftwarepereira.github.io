@@ -1,17 +1,18 @@
 import { useState } from 'react';
 import { FaAngleUp, FaAngleDown } from 'react-icons/fa6';
-import { Category, Product } from '../interfaces/ProductInterface';
+import {
+  Category,
+  Product,
+  ShoppingCartItem,
+} from '../interfaces/ProductInterface';
 import ProductCard from './ProductCard';
 
 type CategoryCardProps = {
   category: Category;
-  productQuantities: Array<{ product: Product; quantity: number }>;
-  setProductQuantities: (
-    productQuantities: {
-      product: Product;
-      quantity: number;
-    }[]
-  ) => void;
+  productQuantities: Array<ShoppingCartItem>;
+  setProductQuantities: React.Dispatch<
+    React.SetStateAction<Array<ShoppingCartItem>>
+  >;
 };
 
 const CategoryCard: React.FC<CategoryCardProps> = ({

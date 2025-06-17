@@ -1,15 +1,12 @@
 import { PRODUCTS } from '../Constant';
-import { Category, Product } from '../interfaces/ProductInterface';
+import { Category, ShoppingCartItem } from '../interfaces/ProductInterface';
 import CategoryCard from './CategoryCard';
 
 type ProductsByCategoryProps = {
-  productQuantities: Array<{ product: Product; quantity: number }>;
-  setProductQuantities: (
-    productQuantities: {
-      product: Product;
-      quantity: number;
-    }[]
-  ) => void;
+  productQuantities: Array<ShoppingCartItem>;
+  setProductQuantities: React.Dispatch<
+    React.SetStateAction<Array<ShoppingCartItem>>
+  >;
 };
 
 const ProductsByCategory: React.FC<ProductsByCategoryProps> = ({

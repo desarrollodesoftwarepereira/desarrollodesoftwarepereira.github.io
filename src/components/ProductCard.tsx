@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import { Product } from '../interfaces/ProductInterface';
+import { Product, ShoppingCartItem } from '../interfaces/ProductInterface';
 import { FaTimes } from 'react-icons/fa';
 
 type ProductCardProps = {
   product: Product;
-  productQuantities: Array<{ product: Product; quantity: number }>;
-  setProductQuantities?: React.Dispatch<
-    React.SetStateAction<Array<{ product: Product; quantity: number }>>
+  productQuantities: Array<ShoppingCartItem>;
+  setProductQuantities: React.Dispatch<
+    React.SetStateAction<Array<ShoppingCartItem>>
   >;
 };
 
