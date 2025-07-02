@@ -10,7 +10,7 @@ const App: React.FC = () => {
   >([]);
 
   return (
-    <div className="flex items-center justify-center w-full h-full p-2 xs:p-4 sm:p-8">
+    <div className="flex items-center justify-center w-full h-full p-2 xs:p-4 sm:p-8 my-auto relative">
       <div className="container flex flex-col gap-4 p-2 shadow-lg xs:gap-6 sm:gap-8 xs:p-4 sm:p-8 bg-app-bg rounded-2xl">
         <Profile />
         <ProductsByCategory

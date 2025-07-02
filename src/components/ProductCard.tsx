@@ -16,16 +16,20 @@ const ProductCard: React.FC<ProductCardProps> = ({
   setProductQuantities,
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showContent, setShowContent] = useState(false);
+
   const quantity =
     productQuantities.find((item) => item.product.name === product.name)
       ?.quantity || 0;
 
   const openModal = () => {
     setIsModalOpen(true);
+    setTimeout(() => setShowContent(true), 10);
   };
 
   const closeModal = () => {
-    setIsModalOpen(false);
+    setShowContent(false);
+    setTimeout(() => setIsModalOpen(false), 300);
   };
 
   const minusQuantity = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -109,16 +113,20 @@ const ProductCard: React.FC<ProductCardProps> = ({
           <div className="flex items-center gap-2">
             <button
               onClick={minusQuantity}
-              className="px-3 py-1 font-bold text-white bg-red-500 rounded-full"
+              className="w-9 h-9 relative bg-red-500 rounded-full cursor-pointer hover:scale-115 active:scale-105 transition-transform"
             >
-              -
+              <span className="text-white font-bold text-2xl absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                -
+              </span>
             </button>
             <span className="flex justify-center w-5">{quantity}</span>
             <button
               onClick={plusQuantity}
-              className="px-3 py-1 font-bold text-white bg-green-500 rounded-full"
+              className="w-9 h-9 relative bg-green-500 rounded-full cursor-pointer hover:scale-115 active:scale-105 transition-transform"
             >
-              +
+              <span className="text-white font-bold text-2xl absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                +
+              </span>
             </button>
           </div>
         </div>
@@ -127,13 +135,20 @@ const ProductCard: React.FC<ProductCardProps> = ({
       {isModalOpen && (
         <div
           onClick={closeModal}
-          className="fixed top-0 left-0 flex items-center justify-center w-full h-full bg-black/50"
+          className={`
+            fixed top-0 left-0 flex items-center justify-center w-full h-full
+            bg-black/50 transition-opacity duration-300
+            ${showContent ? 'opacity-100' : 'opacity-0'}
+          `}
         >
           <div
             onClick={(e) => {
               e.stopPropagation(); // Prevent modal from closing
             }}
-            className="relative flex flex-col items-center max-w-md max-h-screen p-4 overflow-y-auto rounded-lg bg-product-bg text-product-text"
+            className={`relative flex flex-col items-center max-w-md max-h-screen p-4 overflow-y-auto rounded-lg bg-product-bg text-product-text
+              transition-all duration-300
+              ${showContent ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}
+            `}
           >
             {product.imageUrl && (
               <img
@@ -153,23 +168,27 @@ const ProductCard: React.FC<ProductCardProps> = ({
             <div className="flex items-center gap-2">
               <button
                 onClick={minusQuantity}
-                className="px-3 py-1 font-bold text-white bg-red-500 rounded-full"
+                className="w-9 h-9 relative bg-red-500 rounded-full cursor-pointer hover:scale-115 active:scale-105 transition-transform"
               >
-                -
+                <span className="text-white font-bold text-2xl absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                  -
+                </span>
               </button>
               <span className="flex justify-center w-5">{quantity}</span>
               <button
                 onClick={plusQuantity}
-                className="px-3 py-1 font-bold text-white bg-green-500 rounded-full"
+                className="w-9 h-9 relative bg-green-500 rounded-full cursor-pointer hover:scale-115 active:scale-105 transition-transform"
               >
-                +
+                <span className="text-white font-bold text-2xl absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                  +
+                </span>
               </button>
             </div>
             <span
               onClick={closeModal}
               className="absolute top-0 right-0 z-10 p-1"
             >
-              <FaTimes className="text-2xl" />
+              <FaTimes className="text-2xl hover:scale-115 transition-transform cursor-pointer" />
             </span>
           </div>
         </div>
