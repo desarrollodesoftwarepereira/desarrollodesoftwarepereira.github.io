@@ -1,4 +1,4 @@
-import{r as u}from"./react-Cc3XZFZZ.js";import"./cookie--_YQFYBD.js";/**
+import{r as u}from"./react-vendor-CJvn5E3e.js";import"./cookie-FgAT-pUM.js";/**
  * react-router v7.3.0
  *
  * Copyright (c) Remix Software Inc.
