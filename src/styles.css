@@ -7,7 +7,7 @@
   --color-toasted-orange: #E67E22;
   --color-soft-cream: #F5DEB3;
   --color-rustic-brown: #7B3F00;
-  --color-body-bg: #F1C40F;
+  --color-body-bg: #000000;
   --color-app-bg: #F5DEB3;
   --color-category-bg: #7B3F00;
   --color-category-text: #FFF;
@@ -32,7 +32,9 @@
     overflow-y: auto;
   }
 
-  h1, h2, h3 {
+  h1,
+  h2,
+  h3 {
     font-weight: 700;
   }
 

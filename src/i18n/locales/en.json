@@ -1,0 +1,85 @@
+{
+  "hero": {
+    "title": "Create Your Custom MiniDisc",
+    "subtitle": "A transparent acrylic CD with your favorite image. Unique, special, and with optional NFC technology.",
+    "cta": "Personalize yours!",
+    "badge": "Handmade in Pereira"
+  },
+  "step": {
+    "upload": "Upload image",
+    "crop": "Crop image",
+    "cropHint": "Adjust your image in the circle"
+  },
+  "disc": {
+    "title": "Mini Disc",
+    "subtitle": "Your image on a transparent acrylic CD",
+    "form": {
+      "frontImage": "Front image",
+      "frontImageRequired": "Front image is required",
+      "changeImage": "Change image",
+      "uploadImage": "Upload image",
+      "nfcUrl": "URL for NFC (optional)",
+      "nfcUrlPlaceholder": "https://your-link.com",
+      "nfcUrlInvalid": "Enter a valid URL",
+      "nfcPrice": "+$20.000 COP — Includes NFC",
+      "nfcQrPreview": "QR preview",
+      "total": "Mini Disc total"
+    }
+  },
+  "holder": {
+    "title": "Disc Holder",
+    "subtitle": "Acrylic case for your MiniDisc",
+    "form": {
+      "frontImage": "Disc holder front image",
+      "frontImageHint": "Uses the same disc image by default",
+      "sameAsDisc": "Use same image as disc",
+      "changeImage": "Change image",
+      "color": "Disc holder color",
+      "colorTransparent": "Transparent",
+      "colorTransparentLabel": "Transparent (included)",
+      "colorBlack": "Black",
+      "colorBlackLabel": "Black (+$15.000 COP)",
+      "colorWhite": "White",
+      "colorWhiteLabel": "White (+$15.000 COP)",
+      "colorPrice": "+$15.000 COP",
+      "included": "Included in base price",
+      "total": "Disc holder total"
+    }
+  },
+  "price": {
+    "base": "Mini Disc + Disc Holder (transparent)",
+    "nfc": "+ NFC",
+    "holderColor": "+ Holder color",
+    "total": "Total",
+    "cop": "COP"
+  },
+  "form": {
+    "buy": "Buy — Download PDF & WhatsApp",
+    "buyHint": "A PDF with your specifications will be downloaded",
+    "totalCombined": "Total"
+  },
+  "pdf": {
+    "title": "MiniDisc — Order Specifications",
+    "discSection": "Mini Disc",
+    "holderSection": "Disc Holder",
+    "discImage": "Disc image",
+    "holderImage": "Holder image",
+    "nfcUrl": "NFC URL",
+    "nfcNone": "No NFC",
+    "qr": "QR Code (disc back face)",
+    "holderColor": "Holder color",
+    "date": "Date",
+    "totalPrice": "Total price"
+  },
+  "whatsapp": {
+    "message": "Hello! I want to order a custom MiniDisc. I'm attaching the PDF with my specifications: "
+  },
+  "lang": {
+    "switch": "ES"
+  },
+  "cropper": {
+    "zoom": "Zoom",
+    "confirm": "Confirm crop",
+    "cancel": "Cancel"
+  }
+}

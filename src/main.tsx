@@ -1,10 +1,10 @@
-import { StrictMode, Suspense } from 'react'
+import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import './styles.css'
+import './i18n'
 import RedirectTo404 from './components/RedirectTo404.tsx'
-import Portada from './components/Portada.tsx'
 import App from './App.tsx'
 
 const basePath = import.meta.env.VITE_BASE_PATH || '/';
@@ -14,9 +14,7 @@ createRoot(document.getElementById('root')!).render(
     <BrowserRouter>
       <Routes>
         <Route path={basePath} element={
-          <Suspense fallback={<Portada />}>
-            <App />
-          </Suspense>
+          <App />
         } />
         <Route path="*" element={<RedirectTo404 />} />
       </Routes>

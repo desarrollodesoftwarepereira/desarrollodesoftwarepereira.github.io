@@ -1,29 +1,46 @@
-import Profile from './components/Profile';
-import ProductsByCategory from './components/ProductsByCategory';
-import ShoppingCart from './components/ShoppingCart';
-import { useState } from 'react';
-import { ShoppingCartItem } from './interfaces/ProductInterface';
+import { useState } from 'react'
+import HeroSection from './components/minidisco/HeroSection'
+import DiscSection from './components/minidisco/disc/DiscSection'
+import HolderSection from './components/minidisco/holder/HolderSection'
+import BuyButton from './components/minidisco/BuyButton'
+import type { HolderColor } from './components/minidisco/holder/HolderRenderer'
 
 const App: React.FC = () => {
-  const [productQuantities, setProductQuantities] = useState<
-    ShoppingCartItem[]
-  >([]);
+  const [discImage, setDiscImage] = useState<string | null>(null)
+  const [nfcUrl, setNfcUrl] = useState('')
+  const [qrDataUrl, setQrDataUrl] = useState<string | null>(null)
+  const [holderImage, setHolderImage] = useState<string | null>(null)
+  const [holderColor, setHolderColor] = useState<HolderColor>('transparent')
+
+  const holderDisplayImage = holderImage ?? discImage
 
   return (
-    <div className="flex items-center justify-center w-full h-full p-2 xs:p-4 sm:p-8 my-auto relative">
-      <div className="container flex flex-col gap-4 p-2 shadow-lg xs:gap-6 sm:gap-8 xs:p-4 sm:p-8 bg-app-bg rounded-2xl">
-        <Profile />
-        <ProductsByCategory
-          productQuantities={productQuantities}
-          setProductQuantities={setProductQuantities}
-        />
-        <ShoppingCart
-          productQuantities={productQuantities}
-          setProductQuantities={setProductQuantities}
-        />
-      </div>
+    <div className="w-full min-h-full bg-black">
+      <HeroSection />
+      <DiscSection
+        discImage={discImage}
+        onDiscImageChange={setDiscImage}
+        nfcUrl={nfcUrl}
+        onNfcUrlChange={setNfcUrl}
+        qrDataUrl={qrDataUrl}
+        onQrDataUrl={setQrDataUrl}
+      />
+      <HolderSection
+        discImage={discImage}
+        holderImage={holderImage}
+        onHolderImageChange={setHolderImage}
+        color={holderColor}
+        onColorChange={setHolderColor}
+      />
+      <BuyButton
+        discImage={discImage}
+        nfcUrl={nfcUrl}
+        qrDataUrl={qrDataUrl}
+        holderDisplayImage={holderDisplayImage}
+        holderColor={holderColor}
+      />
     </div>
-  );
-};
+  )
+}
 
-export default App;
+export default App

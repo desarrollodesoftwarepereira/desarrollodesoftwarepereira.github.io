@@ -1,0 +1,85 @@
+{
+  "hero": {
+    "title": "Crea tu MiniDisco Personalizado",
+    "subtitle": "Un CD acrílico transparente con tu imagen favorita. Único, especial y con tecnología NFC opcional.",
+    "cta": "¡Personaliza el tuyo!",
+    "badge": "Hecho a mano en Pereira"
+  },
+  "step": {
+    "upload": "Subir imagen",
+    "crop": "Recortar imagen",
+    "cropHint": "Ajusta tu imagen en el círculo"
+  },
+  "disc": {
+    "title": "Mini Disco",
+    "subtitle": "Tu imagen en un CD acrílico transparente",
+    "form": {
+      "frontImage": "Imagen frontal",
+      "frontImageRequired": "La imagen frontal es obligatoria",
+      "changeImage": "Cambiar imagen",
+      "uploadImage": "Subir imagen",
+      "nfcUrl": "URL para NFC (opcional)",
+      "nfcUrlPlaceholder": "https://tu-enlace.com",
+      "nfcUrlInvalid": "Ingresa una URL válida",
+      "nfcPrice": "+$20.000 COP — Incluye NFC",
+      "nfcQrPreview": "Vista previa del QR",
+      "total": "Total Mini Disco"
+    }
+  },
+  "holder": {
+    "title": "Porta Disco",
+    "subtitle": "Estuche acrílico para tu MiniDisco",
+    "form": {
+      "frontImage": "Imagen frontal del porta disco",
+      "frontImageHint": "Usa la misma imagen del disco por defecto",
+      "sameAsDisc": "Usar misma imagen del disco",
+      "changeImage": "Cambiar imagen",
+      "color": "Color del porta disco",
+      "colorTransparent": "Transparente",
+      "colorTransparentLabel": "Transparente (incluido)",
+      "colorBlack": "Negro",
+      "colorBlackLabel": "Negro (+$15.000 COP)",
+      "colorWhite": "Blanco",
+      "colorWhiteLabel": "Blanco (+$15.000 COP)",
+      "colorPrice": "+$15.000 COP",
+      "included": "Incluido en el precio base",
+      "total": "Total Porta Disco"
+    }
+  },
+  "price": {
+    "base": "Mini Disco + Porta Disco (transparente)",
+    "nfc": "+ NFC",
+    "holderColor": "+ Color porta disco",
+    "total": "Total",
+    "cop": "COP"
+  },
+  "form": {
+    "buy": "Comprar — Descargar PDF y WhatsApp",
+    "buyHint": "Se descargará un PDF con tus especificaciones",
+    "totalCombined": "Total"
+  },
+  "pdf": {
+    "title": "MiniDisco — Especificaciones de Orden",
+    "discSection": "Mini Disco",
+    "holderSection": "Porta Disco",
+    "discImage": "Imagen del disco",
+    "holderImage": "Imagen del porta disco",
+    "nfcUrl": "URL NFC",
+    "nfcNone": "Sin NFC",
+    "qr": "Código QR (cara trasera del disco)",
+    "holderColor": "Color del porta disco",
+    "date": "Fecha",
+    "totalPrice": "Precio total"
+  },
+  "whatsapp": {
+    "message": "Hola! Quiero ordenar un MiniDisco personalizado. Adjunto el PDF con mis especificaciones: "
+  },
+  "lang": {
+    "switch": "EN"
+  },
+  "cropper": {
+    "zoom": "Zoom",
+    "confirm": "Confirmar recorte",
+    "cancel": "Cancelar"
+  }
+}
