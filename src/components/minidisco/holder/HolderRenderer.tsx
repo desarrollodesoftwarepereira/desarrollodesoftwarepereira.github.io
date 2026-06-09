@@ -56,9 +56,7 @@ function HolderMesh({ frontImageUrl, color, backTextureUrl }: HolderMeshProps) {
   const frontMat = frontTexture
     ? new THREE.MeshBasicMaterial({ map: frontTexture, transparent: true })
     : buildMaterial(color)
-  const backMat = backTexture
-    ? new THREE.MeshBasicMaterial({ map: backTexture, transparent: true })
-    : buildMaterial(color)
+  const backMat = buildMaterial(color)
 
   return (
     <group ref={groupRef}>
@@ -71,6 +69,12 @@ function HolderMesh({ frontImageUrl, color, backTextureUrl }: HolderMeshProps) {
         <primitive object={frontMat} attach="material-4" />
         <primitive object={backMat} attach="material-5" />
       </mesh>
+      {backTexture && (
+        <mesh position={[0, 0, -0.061]} rotation={[0, Math.PI, 0]}>
+          <planeGeometry args={[1.4 * 0.6, 1.25 * 0.6]} />
+          <meshBasicMaterial map={backTexture} transparent />
+        </mesh>
+      )}
     </group>
   )
 }
@@ -98,7 +102,7 @@ interface Props {
 
 export default function HolderRenderer({ frontImageUrl, color }: Props) {
   return (
-    <div className="w-full h-full min-h-[400px] relative">
+    <div className="absolute inset-0">
       <Canvas
         camera={{ position: [0, 0, 3], fov: 45 }}
         gl={{ antialias: true, alpha: true }}

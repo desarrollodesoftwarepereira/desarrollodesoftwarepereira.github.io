@@ -24,14 +24,9 @@ export default function DiscSection({ discImage, onDiscImageChange, nfcUrl, onNf
 
         <div className="flex flex-col lg:flex-row gap-8 items-stretch">
           {/* 3D Render */}
-          <div className="flex-1 min-h-[420px] bg-white/3 rounded-2xl border border-white/10 overflow-hidden relative">
+          <div className="flex-1 min-h-[340px] sm:min-h-[400px] lg:min-h-[420px] bg-white/3 rounded-2xl border border-white/10 overflow-hidden relative">
             <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 to-cyan-900/20 pointer-events-none" />
             <DiscRenderer frontImageUrl={discImage} backQrUrl={qrDataUrl} />
-            {!discImage && (
-              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <p className="text-white/20 text-sm text-center px-8">{t('disc.form.uploadImage')}</p>
-              </div>
-            )}
           </div>
 
           {/* Form */}

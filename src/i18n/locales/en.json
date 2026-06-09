@@ -13,6 +13,7 @@
   "disc": {
     "title": "Mini Disc",
     "subtitle": "Your image on a transparent acrylic CD",
+    "nfcBackPlaceholder": "Optional NFC",
     "form": {
       "frontImage": "Front image",
       "frontImageRequired": "Front image is required",
@@ -21,7 +22,7 @@
       "nfcUrl": "URL for NFC (optional)",
       "nfcUrlPlaceholder": "https://your-link.com",
       "nfcUrlInvalid": "Enter a valid URL",
-      "nfcPrice": "+$20.000 COP — Includes NFC",
+      "nfcPrice": "+${{price}} COP — Includes NFC",
       "nfcQrPreview": "QR preview",
       "total": "Mini Disc total"
     }
@@ -38,10 +39,9 @@
       "colorTransparent": "Transparent",
       "colorTransparentLabel": "Transparent (included)",
       "colorBlack": "Black",
-      "colorBlackLabel": "Black (+$15.000 COP)",
+      "colorBlackLabel": "Black (+${{price}} COP)",
       "colorWhite": "White",
-      "colorWhiteLabel": "White (+$15.000 COP)",
-      "colorPrice": "+$15.000 COP",
+      "colorWhiteLabel": "White (+${{price}} COP)",
       "included": "Included in base price",
       "total": "Disc holder total"
     }

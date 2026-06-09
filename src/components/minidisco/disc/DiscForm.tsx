@@ -122,7 +122,7 @@ export default function DiscForm({ discImage, onDiscImageChange, nfcUrl, onNfcUr
           {isValidUrl && (
             <div className="mt-3 flex flex-col gap-3">
               <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/20 border border-cyan-500/30 text-cyan-300 text-xs font-medium w-fit">
-                ✦ {t('disc.form.nfcPrice')}
+                ✦ {t('disc.form.nfcPrice', { price: formatCOP(NFC_PRICE_COP) })}
               </span>
               <div className="flex flex-col items-start gap-2">
                 <span className="text-white/50 text-xs">{t('disc.form.nfcQrPreview')}</span>

@@ -132,7 +132,7 @@ export default function HolderForm({ discImage, holderImage, onHolderImageChange
                         : 'border-gray-300 bg-white'
                     }`}
                   />
-                  <span>{t(labelKey)}</span>
+                  <span>{t(labelKey, { price: formatCOP(HOLDER_COLOR_PRICE_COP) })}</span>
                 </div>
                 {color === value && (
                   <svg className="w-4 h-4 text-cyan-400" fill="currentColor" viewBox="0 0 20 20">

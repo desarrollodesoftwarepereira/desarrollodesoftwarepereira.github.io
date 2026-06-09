@@ -45,25 +45,25 @@ async function buildPdf(t: (key: string) => string, discImage: string, nfcUrl: s
   // Disc image (circular look via square with note)
   doc.setFontSize(10)
   doc.setTextColor(200, 200, 200)
-  doc.text(t('pdf.discImage'), margin, 48)
-  doc.addImage(discImage, 'PNG', margin, 52, 60, 60)
+  doc.text(t('pdf.discImage'), margin, 46)
+  doc.addImage(discImage, 'PNG', margin, 50, 170, 170)
 
-  let y = 125
+  let y = 228
   // NFC URL
   doc.setFontSize(10)
   doc.setTextColor(180, 130, 255)
   doc.text(t('pdf.nfcUrl') + ':', margin, y)
   doc.setTextColor(255, 255, 255)
   doc.text(nfcUrl || t('pdf.nfcNone'), margin + 30, y)
-  y += 10
+  y += 8
 
   // QR
   if (qrDataUrl) {
     doc.setTextColor(180, 130, 255)
     doc.text(t('pdf.qr') + ':', margin, y)
-    y += 5
-    doc.addImage(qrDataUrl, 'PNG', margin, y, 50, 50)
-    y += 55
+    y += 4
+    doc.addImage(qrDataUrl, 'PNG', margin, y, 36, 36)
+    y += 40
   }
 
   // ── Page 2: Holder ──
@@ -80,14 +80,14 @@ async function buildPdf(t: (key: string) => string, discImage: string, nfcUrl: s
     doc.setFontSize(10)
     doc.setTextColor(200, 200, 200)
     doc.text(t('pdf.holderImage'), margin, 38)
-    doc.addImage(holderDisplayImage, 'PNG', margin, 42, 60, 60)
+    doc.addImage(holderDisplayImage, 'PNG', margin, 42, 170, 170)
   }
 
   doc.setFontSize(10)
   doc.setTextColor(180, 130, 255)
-  doc.text(t('pdf.holderColor') + ':', margin, 115)
+  doc.text(t('pdf.holderColor') + ':', margin, 222)
   doc.setTextColor(255, 255, 255)
-  doc.text(holderColor.charAt(0).toUpperCase() + holderColor.slice(1), margin + 35, 115)
+  doc.text(holderColor.charAt(0).toUpperCase() + holderColor.slice(1), margin + 35, 222)
 
   // ── Footer both pages ──
   const pages = doc.getNumberOfPages()

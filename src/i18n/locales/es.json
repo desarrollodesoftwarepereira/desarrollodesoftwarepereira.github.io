@@ -13,6 +13,7 @@
   "disc": {
     "title": "Mini Disco",
     "subtitle": "Tu imagen en un CD acrílico transparente",
+    "nfcBackPlaceholder": "NFC opcional",
     "form": {
       "frontImage": "Imagen frontal",
       "frontImageRequired": "La imagen frontal es obligatoria",
@@ -21,7 +22,7 @@
       "nfcUrl": "URL para NFC (opcional)",
       "nfcUrlPlaceholder": "https://tu-enlace.com",
       "nfcUrlInvalid": "Ingresa una URL válida",
-      "nfcPrice": "+$20.000 COP — Incluye NFC",
+      "nfcPrice": "+${{price}} COP — Incluye NFC",
       "nfcQrPreview": "Vista previa del QR",
       "total": "Total Mini Disco"
     }
@@ -38,10 +39,9 @@
       "colorTransparent": "Transparente",
       "colorTransparentLabel": "Transparente (incluido)",
       "colorBlack": "Negro",
-      "colorBlackLabel": "Negro (+$15.000 COP)",
+      "colorBlackLabel": "Negro (+${{price}} COP)",
       "colorWhite": "Blanco",
-      "colorWhiteLabel": "Blanco (+$15.000 COP)",
-      "colorPrice": "+$15.000 COP",
+      "colorWhiteLabel": "Blanco (+${{price}} COP)",
       "included": "Incluido en el precio base",
       "total": "Total Porta Disco"
     }

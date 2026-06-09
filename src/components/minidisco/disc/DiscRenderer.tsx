@@ -1,14 +1,34 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useMemo } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
+import { useTranslation } from 'react-i18next'
 import * as THREE from 'three'
 
 interface DiscMeshProps {
   frontImageUrl: string | null
   backQrUrl: string | null
+  nfcPlaceholderText: string
+  uploadPlaceholderText: string
 }
 
-function DiscMesh({ frontImageUrl, backQrUrl }: DiscMeshProps) {
+// Textura de texto para la cara trasera cuando no hay QR
+function makeLabelTexture(text: string): THREE.CanvasTexture {
+  const canvas = document.createElement('canvas')
+  canvas.width = 512
+  canvas.height = 256
+  const ctx = canvas.getContext('2d')!
+  ctx.clearRect(0, 0, canvas.width, canvas.height)
+  ctx.font = '600 52px sans-serif'
+  ctx.textAlign = 'center'
+  ctx.textBaseline = 'middle'
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.45)'
+  ctx.fillText(text, canvas.width / 2, canvas.height / 2)
+  const tex = new THREE.CanvasTexture(canvas)
+  tex.anisotropy = 4
+  return tex
+}
+
+function DiscMesh({ frontImageUrl, backQrUrl, nfcPlaceholderText, uploadPlaceholderText }: DiscMeshProps) {
   const groupRef = useRef<THREE.Group>(null)
   const [frontTexture, setFrontTexture] = useState<THREE.Texture | null>(null)
   const [backTexture, setBackTexture] = useState<THREE.Texture | null>(null)
@@ -58,23 +78,60 @@ function DiscMesh({ frontImageUrl, backQrUrl }: DiscMeshProps) {
 
   const frontMat = frontTexture
     ? new THREE.MeshBasicMaterial({ map: frontTexture, side: THREE.FrontSide, transparent: true })
-    : new THREE.MeshPhysicalMaterial({ color: 0xcccccc, transmission: 0.8, roughness: 0.1, transparent: true, opacity: 0.5 })
+    : null
 
   const backMat = backTexture
     ? new THREE.MeshBasicMaterial({ map: backTexture, side: THREE.FrontSide, transparent: true })
-    : new THREE.MeshPhysicalMaterial({ color: 0xaaaaaa, transmission: 0.8, roughness: 0.1, transparent: true, opacity: 0.4 })
+    : null
+
+  // Placeholder "NFC opcional" cuando la cara trasera no tiene QR
+  const placeholderTexture = useMemo(() => makeLabelTexture(nfcPlaceholderText), [nfcPlaceholderText])
+  const placeholderGeo = new THREE.PlaneGeometry(1.2, 0.6)
+  const placeholderMat = new THREE.MeshBasicMaterial({
+    map: placeholderTexture,
+    side: THREE.FrontSide,
+    transparent: true,
+    depthWrite: false,
+  })
+
+  // Placeholder "Subir imagen" cuando la cara frontal no tiene imagen
+  const uploadTexture = useMemo(() => makeLabelTexture(uploadPlaceholderText), [uploadPlaceholderText])
+  const uploadMat = new THREE.MeshBasicMaterial({
+    map: uploadTexture,
+    side: THREE.FrontSide,
+    transparent: true,
+    depthWrite: false,
+  })
 
   return (
     <group ref={groupRef}>
-      {/* Cara frontal (imagen) — normal +Z */}
-      <mesh geometry={frontGeo} position={[0, 0, depth / 2]}>
-        <primitive object={frontMat} attach="material" />
-      </mesh>
+      {/* Cara frontal (imagen) — solo visible con textura cargada */}
+      {frontMat && (
+        <mesh geometry={frontGeo} position={[0, 0, depth / 2]}>
+          <primitive object={frontMat} attach="material" />
+        </mesh>
+      )}
 
-      {/* Cara trasera (QR) — PlaneGeometry rotado 180° en Y: sin recorte circular */}
-      <mesh geometry={backGeo} position={[0, 0, -depth / 2]} rotation={[0, Math.PI, 0]}>
-        <primitive object={backMat} attach="material" />
-      </mesh>
+      {/* Cara frontal sin imagen: mensaje informativo "Subir imagen" */}
+      {!frontMat && (
+        <mesh geometry={placeholderGeo} position={[0, 0, depth / 2]}>
+          <primitive object={uploadMat} attach="material" />
+        </mesh>
+      )}
+
+      {/* Cara trasera (QR) — solo visible con textura cargada */}
+      {backMat && (
+        <mesh geometry={backGeo} position={[0, 0, -depth / 2]} rotation={[0, Math.PI, 0]}>
+          <primitive object={backMat} attach="material" />
+        </mesh>
+      )}
+
+      {/* Cara trasera sin QR: mensaje informativo "NFC opcional" */}
+      {!backMat && (
+        <mesh geometry={placeholderGeo} position={[0, 0, -depth / 2]} rotation={[0, Math.PI, 0]}>
+          <primitive object={placeholderMat} attach="material" />
+        </mesh>
+      )}
 
       {/* Borde acrílico */}
       <mesh geometry={rimGeo}>
@@ -84,7 +141,7 @@ function DiscMesh({ frontImageUrl, backQrUrl }: DiscMeshProps) {
   )
 }
 
-function Scene({ frontImageUrl, backQrUrl }: DiscMeshProps) {
+function Scene({ frontImageUrl, backQrUrl, nfcPlaceholderText, uploadPlaceholderText }: DiscMeshProps) {
   const { gl } = useThree()
   useEffect(() => {
     gl.setPixelRatio(window.devicePixelRatio)
@@ -96,7 +153,7 @@ function Scene({ frontImageUrl, backQrUrl }: DiscMeshProps) {
       <pointLight position={[3, 3, 3]} intensity={1.5} color={0xffffff} />
       <pointLight position={[-3, -2, 2]} intensity={0.8} color={0x8b5cf6} />
       <pointLight position={[0, 3, -3]} intensity={0.6} color={0x06b6d4} />
-      <DiscMesh frontImageUrl={frontImageUrl} backQrUrl={backQrUrl} />
+      <DiscMesh frontImageUrl={frontImageUrl} backQrUrl={backQrUrl} nfcPlaceholderText={nfcPlaceholderText} uploadPlaceholderText={uploadPlaceholderText} />
       <OrbitControls enablePan={false} enableZoom={true} minDistance={1.5} maxDistance={5} />
     </>
   )
@@ -108,14 +165,22 @@ interface Props {
 }
 
 export default function DiscRenderer({ frontImageUrl, backQrUrl }: Props) {
+  // useTranslation se llama aquí: el Canvas de R3F es un root de React aparte
+  // y el contexto de i18next no cruza hacia adentro
+  const { t } = useTranslation()
   return (
-    <div className="w-full h-full min-h-[400px]">
+    <div className="absolute inset-0">
       <Canvas
         camera={{ position: [0, 0.5, 3], fov: 45 }}
         gl={{ antialias: true, alpha: true }}
         style={{ background: 'transparent' }}
       >
-        <Scene frontImageUrl={frontImageUrl} backQrUrl={backQrUrl} />
+        <Scene
+          frontImageUrl={frontImageUrl}
+          backQrUrl={backQrUrl}
+          nfcPlaceholderText={t('disc.nfcBackPlaceholder')}
+          uploadPlaceholderText={t('disc.form.uploadImage')}
+        />
       </Canvas>
     </div>
   )
